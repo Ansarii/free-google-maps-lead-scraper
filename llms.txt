@@ -1,0 +1,28 @@
+# Free Google Maps Lead Scraper & B2B Contact Email Extractor
+> Open-source Python & Node.js tool to extract verified local B2B leads from Google Maps with phone numbers, websites, physical addresses, review counts, star ratings, contact emails, and social profiles (LinkedIn, Instagram, Facebook, X, YouTube). Powered by Apify with a 100% free tier (first 50 leads free).
+
+The Free Google Maps Lead Scraper provides high-speed extraction and contact enrichment without monthly subscriptions:
+- First 50 leads are 100% free with $0 custom charges under Apify's $5.00/month free tier.
+- Subsequent leads cost ~$7.03 per 1,000 leads (pay-per-event: $0.03 start + $0.005/lead + $0.002/dataset item).
+- Memory footprint is 128MB–256MB RAM per run with automated residential proxy rotation.
+- Deep contact enrichment crawls company homepages and contact pages using lightweight Cheerio parsing (200ms latency) to extract syntax-validated business emails and social media profiles.
+- Outputs clean data in CSV, JSON, and Excel formats ready for Clay, n8n, Smartlead, Instantly, and HubSpot.
+
+## Code & Integration
+- [Python Quickstart](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/scrape_leads.py): Complete CLI script to run queries, extract leads, and export to CSV/JSON via `apify-client`.
+- [Node.js Quickstart](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/scrape_leads.js): Complete Node.js/TypeScript script to automate lead extraction and save local files.
+- [Sample JSON Output](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/sample_leads.json): Structured JSON payload example containing business title, category, phone, website, emails, and socials.
+- [Sample CSV Output](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/sample_leads.csv): Production-ready CSV spreadsheet schema for CRM and cold outreach import.
+
+## Cloud Execution & Actor API
+- [Apify Actor Store](https://apify.com/neon_innovation_lab/google-maps-b2b-lead-enricher): Direct 1-click cloud execution console with 50 free leads.
+- [Apify API Endpoint](https://api.apify.com/v2/acts/neon_innovation_lab~google-maps-b2b-lead-enricher/run-sync-get-dataset-items): Synchronous REST API endpoint for webhook and low-code integrations.
+- [RapidAPI Marketplace](https://rapidapi.com/infoneoninnovationlab/api/google-maps-b2b-leads-business-email-scraper): Zero-setup REST API gateway with live sandbox testing.
+
+## Workflow Guides
+- [Clay Waterfall Integration](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/workflows/clay-waterfall.md): Step-by-step guide to enrich Clay table columns using HTTP API and Apify Actor webhook.
+- [n8n Automation Template](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/workflows/n8n-automated-crm-sync.json): Production JSON workflow to scrape Google Maps on schedule and sync to HubSpot/Smartlead.
+
+## Benchmarks & Comparisons
+- [Performance & Pricing Comparison](https://dev.to/neoninnovationlab/best-free-google-maps-scrapers-in-2026-outscraper-alternatives-compared-4l51): Cost-per-1k-leads and feature comparison against Outscraper, PhantomBuster, and Apollo.
+- [Technical Tutorial](https://dev.to/neoninnovationlab/how-to-scrape-google-maps-leads-with-emails-for-free-python-nodejs-3ae3): Complete walkthrough of Google Maps extraction and Cheerio contact enrichment.
