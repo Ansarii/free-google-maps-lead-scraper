@@ -3,11 +3,21 @@
 > **Extract unlimited verified local B2B leads from Google Maps with direct phone numbers, business websites, physical addresses, review counts, star ratings, and contact emails + social media profiles (LinkedIn, Instagram, Facebook, X, YouTube).**
 
 [![Run on Apify](https://apify.com/actor-badge?actor=neon_innovation_lab/google-maps-b2b-lead-enricher)](https://apify.com/neon_innovation_lab/google-maps-b2b-lead-enricher)
+[![Buy Lifetime Desktop License](https://img.shields.io/badge/PayPal-Buy_Desktop_License_$49-0079C1?logo=paypal&logoColor=white)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mohiuddin.ansari%40hotmail.com&item_name=Google%20Maps%20Lead%20Scraper%20Desktop%20CLI%20Lifetime&amount=49.00&currency_code=USD)
 [![GitHub stars](https://img.shields.io/github/stars/Ansarii/free-google-maps-lead-scraper.svg?style=social)](https://github.com/Ansarii/free-google-maps-lead-scraper/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-green.svg)](https://nodejs.org/)
 [![llms.txt](https://img.shields.io/badge/llms.txt-standard-blueviolet)](https://github.com/Ansarii/free-google-maps-lead-scraper/blob/main/llms.txt)
+
+---
+
+## 💳 Two Ways to Run & Extract Leads
+
+| Option | Ideal For | Pricing | Link |
+| :--- | :--- | :--- | :--- |
+| ☁️ **Cloud Runner (Apify)** | Zero installation, automated cloud scheduling, web dashboard | 🎁 **First 50 leads free**, then ~$7/1k leads | [**Run on Apify**](https://apify.com/neon_innovation_lab/google-maps-b2b-lead-enricher) |
+| 💻 **Standalone Desktop CLI** | Local machine execution, unlimited scraping, zero platform fees | 💰 **$49 one-time lifetime license** | [**Buy via PayPal ($49)**](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mohiuddin.ansari%40hotmail.com&item_name=Google%20Maps%20Lead%20Scraper%20Desktop%20CLI%20Lifetime&amount=49.00&currency_code=USD) |
 
 ---
 
