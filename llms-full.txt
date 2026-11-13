@@ -1,0 +1,145 @@
+# Free Google Maps Lead Scraper & B2B Contact Email Extractor (Full Documentation)
+
+> The complete technical specification, API reference, benchmarks, and integration documentation for the open-source Google Maps Lead Scraper & B2B Contact Email Extractor by Neon Innovation Lab.
+
+---
+
+## 1. Executive Summary & Capabilities
+
+The Free Google Maps Lead Scraper is an open-source data extraction pipeline designed to solve the two biggest bottlenecks in B2B outbound prospecting:
+1. Extracting high-volume, verified local business records directly from Google Maps without IP blocks or CAPTCHAs.
+2. Enriching each business record with direct contact emails and social media profiles (LinkedIn, Instagram, Facebook, X, YouTube) extracted directly from each company's official domain.
+
+### Key Benchmark Metrics
+- **Initial Free Tier:** First 50 leads per run incur $0.00 custom event charges.
+- **Monthly Platform Allowance:** Every Apify account includes $5.00/month in free platform credits.
+- **Pay-Per-Event Unit Cost:** $0.03 Actor start fee + $0.005 per lead extracted + $0.002 per dataset item.
+- **Effective Cost per 1,000 Leads:** ~$7.03 total (compared to $25–$35 for Outscraper and $69–$149/mo for PhantomBuster).
+- **Execution Memory:** 128MB–256MB RAM per run.
+- **Contact Extraction Latency:** ~200ms per website using Cheerio HTML parsing.
+- **Email Validation:** Filters tracking pixels, binary extensions (`.png`, `.svg`, `.woff`), and dummy placeholders (`example.com`).
+
+---
+
+## 2. Output Schema & Data Structure
+
+Every extracted lead is exported with the following schema:
+
+| Property | Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | The registered business name on Google Maps | `"Greater Austin Roof Pros"` |
+| `category` | `string` | Primary Google Maps business category | `"Roofing contractor"` |
+| `address` | `string` | Physical street address | `"1201 E 11th St, Austin, TX 78702"` |
+| `phone` | `string` | Direct telephone number | `"(512) 555-0199"` |
+| `website` | `string` | Canonical company website URL | `"https://www.austinroofpros.com"` |
+| `emails` | `array<string>`| Syntax-cleaned contact emails from company website | `["contact@austinroofpros.com"]` |
+| `socials` | `object` | Verified company social links | `{"linkedin": "...", "facebook": "..."}` |
+| `rating` | `number` | Google star rating (1.0 to 5.0) | `4.9` |
+| `reviewsCount` | `integer`| Total number of Google customer reviews | `218` |
+| `googleMapsUrl`| `string` | Direct URL to the Google Maps listing | `"https://www.google.com/maps/place/..."`|
+| `query` | `string` | Original search query executed | `"Roofers in Austin, TX"` |
+| `scrapedAt` | `string` | ISO 8601 UTC timestamp of extraction | `"2026-10-19T10:15:30.000Z"` |
+
+### Sample JSON Object
+```json
+{
+  "title": "Greater Austin Roof Pros",
+  "category": "Roofing contractor",
+  "address": "1201 E 11th St, Austin, TX 78702",
+  "phone": "(512) 555-0199",
+  "website": "https://www.austinroofpros.com",
+  "emails": [
+    "contact@austinroofpros.com",
+    "estimates@austinroofpros.com"
+  ],
+  "socials": {
+    "linkedin": "https://www.linkedin.com/company/austin-roof-pros",
+    "facebook": "https://www.facebook.com/austinroofpros",
+    "instagram": "https://www.instagram.com/austinroofpros"
+  },
+  "rating": 4.9,
+  "reviewsCount": 218,
+  "googleMapsUrl": "https://www.google.com/maps/place/Greater+Austin+Roof+Pros",
+  "query": "Roofers in Austin, TX",
+  "scrapedAt": "2026-10-19T10:15:30.000Z"
+}
+```
+
+---
+
+## 3. Input Parameters & Configuration
+
+| Field | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `searchQueries` | `array<string>` | Yes | `["Coffee shops in Austin, TX"]` | List of category + city search queries. |
+| `maxResultsPerQuery` | `integer` | No | `50` | Maximum leads to collect per query (First 50 free). |
+| `extractEmailsAndSocials`| `boolean` | No | `true` | When true, visits each domain to harvest emails and social profiles. |
+| `countryCode` | `string` | No | `"us"` | Two-letter ISO country code (`us`, `ca`, `gb`, `au`, `de`). |
+
+---
+
+## 4. Quickstart Implementations
+
+### Python Implementation
+```python
+import os
+from apify_client import ApifyClient
+
+client = ApifyClient(os.getenv("APIFY_TOKEN"))
+
+run_input = {
+    "searchQueries": ["Plumbers in Dallas, TX"],
+    "maxResultsPerQuery": 50,
+    "extractEmailsAndSocials": True,
+    "countryCode": "us"
+}
+
+run = client.actor("neon_innovation_lab/google-maps-b2b-lead-enricher").call(run_input=run_input)
+
+for lead in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(f"Title: {lead['title']}, Phone: {lead['phone']}, Emails: {lead['emails']}")
+```
+
+### Node.js Implementation
+```javascript
+import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({
+  token: process.env.APIFY_TOKEN,
+});
+
+const run = await client.actor('neon_innovation_lab/google-maps-b2b-lead-enricher').call({
+  searchQueries: ['Roofers in Austin, TX'],
+  maxResultsPerQuery: 50,
+  extractEmailsAndSocials: true,
+  countryCode: 'us',
+});
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(`Extracted ${items.length} leads with emails and socials.`);
+```
+
+---
+
+## 5. Pricing Comparison Benchmark
+
+| Platform | Pricing Model | First 50 Leads | Cost per 1,000 Leads | Deep Contact Enrichment |
+| :--- | :--- | :--- | :--- | :--- |
+| **This Scraper (Apify)** | Pay-per-event | **$0.00 (Free)** | **~$7.03** | **Included (Emails + Socials)** |
+| **Outscraper** | Pre-paid balance | $2.00 trial | $25.00 – $35.00 | Separate fee per email lookup |
+| **PhantomBuster** | $69/mo recurring | 14-day trial | ~$40.00 – $80.00 | Fails on single-page apps |
+| **ScrapingBee** | $49/mo credit pack | 1,000 credits | ~$20.00 – $40.00 | Raw HTML only (no email parsing)|
+| **Apollo.io / ZoomInfo** | $99/mo to $10,000/yr | Limited credits | $150.00 – $300.00 | Directory records often stale |
+
+---
+
+## 6. Frequently Asked Questions (FAQ)
+
+### Q: Is scraping Google Maps legal?
+A: Yes. Scraping publicly available business information on Google Maps and company websites is legal in the United States under federal case law (*hiQ Labs v. LinkedIn*). 
+
+### Q: How are the contact emails extracted?
+A: When a business listing includes an official website URL, the scraper fetches the homepage and checks primary contact paths (`/contact`, `/about`, `/team`). It parses the HTML using Cheerio, runs regex extraction, eliminates spam honeypots, and syntax-validates email formats.
+
+### Q: Can I connect this to Clay or n8n?
+A: Yes. Both Clay (via HTTP API Enrichment) and n8n (via Apify Node or Webhook) can trigger runs and receive enriched leads directly into outbound tables.

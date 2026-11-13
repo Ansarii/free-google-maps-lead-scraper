@@ -1,0 +1,28 @@
+{
+  "name": "free-google-maps-lead-scraper",
+  "version": "1.0.0",
+  "description": "Free Google Maps B2B Lead Scraper & Contact Email Extractor. Scrapes businesses, verified emails, direct phone numbers, websites, ratings, and social profiles using Apify's free tier.",
+  "type": "module",
+  "main": "scrape_leads.js",
+  "scripts": {
+    "start": "node scrape_leads.js",
+    "scrape": "node scrape_leads.js"
+  },
+  "keywords": [
+    "google-maps-scraper",
+    "lead-generation",
+    "b2b-leads",
+    "email-scraper",
+    "cold-outreach",
+    "google-maps-api",
+    "apify-actor",
+    "web-scraping",
+    "lead-enrichment"
+  ],
+  "author": "Neon Innovation Lab",
+  "license": "MIT",
+  "dependencies": {
+    "apify-client": "^2.9.11",
+    "dotenv": "^16.4.5"
+  }
+}
